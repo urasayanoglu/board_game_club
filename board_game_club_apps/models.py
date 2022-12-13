@@ -31,7 +31,7 @@ class Loan(models.Model):
 
     game_loaned = models.ForeignKey(Game, on_delete=models.CASCADE)
     loan_date = models.DateTimeField(auto_now_add=True)
-    return_date = models.DateTimeField(auto_now_add=True)
+    return_date = models.DateTimeField() # ? Is there a way to limit the return date for 2 weeks etc.
 
     class Meta:
         verbose_name_plural = 'loans'
