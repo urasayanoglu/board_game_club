@@ -15,9 +15,30 @@ class Game(models.Model):
     difficulty = models.CharField(max_length=100)    
     date_added = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now_add=True)
+    loan_status = (
+        ('o', 'On loan'),
+        ('a', 'Available'),
+        )
+    status = models.CharField(max_length=1, choices=loan_status, blank=True, default='a')
 
     def __str__(self):
         """Return a string representation of the model."""
         return self.name
 
+
+class Loan(models.Model):
+    """Representation of loaning a board game."""
+
+    game_loaned = models.ForeignKey(Game, on_delete=models.CASCADE)
+    loan_date = models.DateTimeField(auto_now_add=True)
+    return_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'loans'
+
+    def __str__(self):
+        """Return a string representation of the loan model."""
+        return f"Game {self.game_loaned} borrowed on {self.loan_date}"
+
+    
 
