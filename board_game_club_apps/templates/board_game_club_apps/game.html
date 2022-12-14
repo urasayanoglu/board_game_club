@@ -1,0 +1,15 @@
+{% extends "board_game_club_apps/base.html" %}
+
+{% block content %}
+<p>Board Game: {{ game }}</p>
+<p>Loans:</p>
+  <ul>
+    {% for loan in loans %}
+      <li>
+        <p>Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }}</p>
+      </li>
+    {% empty %}
+      <li>There is not a loan for this game yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

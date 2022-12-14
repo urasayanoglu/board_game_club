@@ -8,5 +8,7 @@ urlpatterns = [
     # Home Page
     path('', views.index, name='index'),
     # Page that shows all the loans
-    path('loans', views.loans, name='loans'), 
+    path('games', views.games, name='games'),
+    # Page with loans for a single game
+    path('games/<int:game_id>/', views.game, name='game'), 
 ]
