@@ -1,0 +1,12 @@
+{% extends "board_game_club_apps/base.html" %}
+
+{% block content %}
+<p>Game Loans</p>
+  <ul>
+    {% for loan in loans %}
+      <li>{{ loan }}</li>
+    {% empty %}
+      <li>A loan hasn't been added yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock content %}
