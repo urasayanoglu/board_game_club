@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Game
 from .forms import GameForm
 
@@ -7,12 +8,14 @@ def index(request):
     """The home page for Board Game Club."""
     return render(request, 'board_game_club_apps/index.html')
 
+@login_required
 def games(request):
     """Show all board games."""
     games = Game.objects.order_by('status')
     context = {'games': games}
     return render(request, 'board_game_club_apps/games.html', context)
 
+@login_required
 def game(request, game_id):
     """Show a board game with loan information."""
     game = Game.objects.get(id=game_id)
@@ -20,6 +23,7 @@ def game(request, game_id):
     context = {'game': game, 'loans':loans}
     return render(request, 'board_game_club_apps/game.html', context)
 
+@login_required
 def new_game(request):
     """Add a new game."""
     if request.method != 'POST':
