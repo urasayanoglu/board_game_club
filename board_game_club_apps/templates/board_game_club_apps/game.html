@@ -1,13 +1,19 @@
 {% extends "board_game_club_apps/base.html" %}
 
+{% block page_header %}
+  <h3>Board Game: {{ game }}</h3>
+{% endblock page_header %}
+
 {% block content %}
-<p>Board Game: {{ game }}</p>
-<p>Loans:</p>
+  <h4>Loans:</h4>
   <ul>
     {% for loan in loans %}
-      <li>
-        <p>Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }}</p>
-      </li>
+      <div class="card mb-3">
+        <h4 class="card-header">
+          Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }} <br>
+          Return Date:
+        </h4>
+      </div>
     {% empty %}
       <li>There is not a loan for this game yet.</li>
     {% endfor %}
