@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
+
 from .models import Game
 from .forms import GameForm
 
@@ -11,7 +13,7 @@ def index(request):
 @login_required
 def games(request):
     """Show all board games."""
-    games = Game.objects.order_by('status')
+    games = Game.objects.filter(owner = request.user).order_by('status')
     context = {'games': games}
     return render(request, 'board_game_club_apps/games.html', context)
 
@@ -19,6 +21,9 @@ def games(request):
 def game(request, game_id):
     """Show a board game with loan information."""
     game = Game.objects.get(id=game_id)
+    # Making sure the game belongs to the current user:
+    if game.owner != request.user:
+        raise Http404
     loans = game.loan_set.order_by('-loan_date')
     context = {'game': game, 'loans':loans}
     return render(request, 'board_game_club_apps/game.html', context)
