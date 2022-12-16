@@ -3,9 +3,12 @@
 
 {% block content %}
 <p>Add a new board game:</p>
-<form action="{% url 'board_game_club_apps:new_game' %}" method="post">
+<form action="{% url 'board_game_club_apps:new_game' %}" method="post" class="form">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">Add game</button>
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button name="submit" class="btn btn-primary">Add Game</button>
+    {% endbuttons %}
+    
 </form>
 {% endblock content %}
