@@ -6,7 +6,8 @@
 <form action="{% url 'board_game_club_apps:new_game' %}" method="post" class="form">
     {% csrf_token %}
     {% bootstrap_form form %}
-    {% buttons %}
+    {% bootstrap_form_errors form type='non_fields' %}
+    {% buttons reset="Cancel" %}
       <button name="submit" class="btn btn-primary">Add Game</button>
     {% endbuttons %}
     
