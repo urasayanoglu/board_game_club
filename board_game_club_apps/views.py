@@ -43,3 +43,18 @@ def new_game(request):
     # Display a blank or an invalid form:
     context = {'form': form}
     return render(request, 'board_game_club_apps/new_game.html', context)
+
+@login_required
+def loanable_games(request):
+    """Show all loanable board games."""
+    games = Game.objects.order_by('status')
+    context = {'games': games}
+    return render(request, 'board_game_club_apps/loanable_games.html', context)
+
+@login_required
+def loanable_game(request, game_id):
+    """Show a board game with loan information."""
+    game = Game.objects.get(id=game_id)
+    loans = game.loan_set.order_by('-loan_date')
+    context = {'game': game, 'loans':loans}
+    return render(request, 'board_game_club_apps/loanable_game.html', context)
