@@ -1,5 +1,5 @@
 from django import forms
-from .models import Game
+from .models import Game, Loan
 
 class GameForm(forms.ModelForm):
     class Meta:
@@ -23,3 +23,13 @@ class GameForm(forms.ModelForm):
             'min_age': "Min Age Required For the Game",
             'difficulty': "Difficulty Level",
             }
+
+class LoanForm(forms.ModelForm):
+    class Meta:
+        model = Loan
+        fields = [
+            'game_loaned',
+        ]
+        labels = {
+            'game_loaned': "Name of the Loaned Game",
+        }

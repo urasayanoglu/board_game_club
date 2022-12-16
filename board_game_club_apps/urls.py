@@ -17,4 +17,6 @@ urlpatterns = [
     path('loanable_games/<int:game_id>/', views.loanable_game, name='loanable_game'),
     # Page for adding a new game
     path('new_game/', views.new_game, name='new_game'), 
+    # Page for loaning a new game
+    path('new_loan/', views.new_loan, name='new_loan'),
 ]

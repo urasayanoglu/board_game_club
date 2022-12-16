@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
-from .models import Game
-from .forms import GameForm
+from .models import Game, Loan
+from .forms import GameForm, LoanForm
 
 # Create your views here.
 def index(request):
@@ -58,3 +58,19 @@ def loanable_game(request, game_id):
     loans = game.loan_set.order_by('-loan_date')
     context = {'game': game, 'loans':loans}
     return render(request, 'board_game_club_apps/loanable_game.html', context)
+
+@login_required
+def new_loan(request):
+    """Add a new game."""
+    if request.method != 'POST':
+        # No data submitted -> create a blank form.
+        form = LoanForm()
+    else:
+        # Post data submitted -> process the data.
+        form = LoanForm(data = request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('board_game_club_apps:loanable_games')
+    # Display a blank or an invalid form:
+    context = {'form': form}
+    return render(request, 'board_game_club_apps/new_loan.html', context)
