@@ -82,6 +82,6 @@ def new_loan(request):
 @login_required
 def my_loans(request):
     """Show loan informations."""
-    loan = Loan.objects.order_by('loan_date')
-    context = {'loans':loan}
+    loans = Loan.objects.filter(owner = request.user).order_by('loan_date')
+    context = {'loans':loans}
     return render(request, 'board_game_club_apps/my_loans.html', context)

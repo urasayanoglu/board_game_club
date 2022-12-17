@@ -6,10 +6,14 @@
 
 {% block content %}
   <ul>
-    {% for loan in loan %}
-      <li><h3>
-        <a href="{% url 'board_game_club_apps:my_loans' loan.id %}">{{ loan }}</a>
-      </h3></li>
+    {% for loan in loans %}
+      <div class="card mb-3">
+        <h4 class="card-header">
+          Game Loned: {{ loan.game_loaned }} <br>
+          Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }} <br>
+          Return Date:
+        </h4>
+      </div>
     {% empty %}
       <li><h3>Unfortunately, there is not any loaned game.</h3></li>
     {% endfor %}
