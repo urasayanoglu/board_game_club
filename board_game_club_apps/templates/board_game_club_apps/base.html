@@ -21,9 +21,11 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-            <a class="nav-link" href="{% url 'board_game_club_apps:games' %}">My Board Games</a></li>
+              <a class="nav-link" href="{% url 'board_game_club_apps:loanable_games' %}">Loanable Games</a></li>
             <li class="nav-item">
-            <a class="nav-link" href="{% url 'board_game_club_apps:loanable_games' %}">Loanable Games</a></li>
+              <a class="nav-link" href="{% url 'board_game_club_apps:games' %}">My Board Games</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'board_game_club_apps:my_loans' %}">My Loans</a></li>
           </ul>
           <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
