@@ -49,7 +49,7 @@ def new_game(request):
 @login_required
 def loanable_games(request):
     """Show all loanable board games."""
-    games = Game.objects.order_by('status') # should this be .order_by or something else
+    games = Game.objects.filter(status='a').order_by('name') #filters to show only games that are available to loan.
     context = {'games': games}
     return render(request, 'board_game_club_apps/loanable_games.html', context)
 
@@ -62,7 +62,7 @@ def loanable_game(request, game_id):
     return render(request, 'board_game_club_apps/loanable_game.html', context)
 
 @login_required
-def new_loan(request):  #if status is 'on loan' the game should not be loanable 
+def new_loan(request):  
     """Add a new game."""
     if request.method != 'POST':
         # No data submitted -> create a blank form.
@@ -73,6 +73,7 @@ def new_loan(request):  #if status is 'on loan' the game should not be loanable
         if form.is_valid():
             new_loan = form.save(commit=False)
             new_loan.owner = request.user
+            new_loan.status = 'o'   #? how to change status from 'a' to 'o'
             new_loan.save()
             return redirect('board_game_club_apps:loanable_games')
     # Display a blank or an invalid form:
