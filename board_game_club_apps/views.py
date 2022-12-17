@@ -71,7 +71,9 @@ def new_loan(request):
         # Post data submitted -> process the data.
         form = LoanForm(data = request.POST)
         if form.is_valid():
-            form.save()
+            new_loan = form.save(commit=False)
+            new_loan.owner = request.user
+            new_loan.save()
             return redirect('board_game_club_apps:loanable_games')
     # Display a blank or an invalid form:
     context = {'form': form}
