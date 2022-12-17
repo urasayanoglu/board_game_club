@@ -8,14 +8,14 @@
   <ul>
     {% for loan in loans %}
       <div class="card mb-3">
-        <h4 class="card-header">
+        <h5 class="card-header">
           Game Loned: {{ loan.game_loaned }} <br>
           Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }} <br>
           Return Date:
-        </h4>
+        </h5>
       </div>
     {% empty %}
-      <li><h3>Unfortunately, there is not any loaned game.</h3></li>
+      <li><h5>Unfortunately, there is not any loaned game.</h5></li>
     {% endfor %}
   </ul>
 

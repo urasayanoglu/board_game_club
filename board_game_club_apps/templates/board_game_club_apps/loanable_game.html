@@ -9,10 +9,10 @@
   <ul>
     {% for loan in loans %}
       <div class="card mb-3">
-        <h4 class="card-header">
+        <h5 class="card-header">
           Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }} <br>
           Return Date:
-        </h4>
+        </h5>
       </div>
     {% empty %}
       <li>There is not a loan for this game yet.</li>
