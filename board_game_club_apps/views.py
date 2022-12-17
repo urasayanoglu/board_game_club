@@ -49,7 +49,7 @@ def new_game(request):
 @login_required
 def loanable_games(request):
     """Show all loanable board games."""
-    games = Game.objects.order_by('status')
+    games = Game.objects.order_by('status') # should this be .order_by or something else
     context = {'games': games}
     return render(request, 'board_game_club_apps/loanable_games.html', context)
 
@@ -62,7 +62,7 @@ def loanable_game(request, game_id):
     return render(request, 'board_game_club_apps/loanable_game.html', context)
 
 @login_required
-def new_loan(request):
+def new_loan(request):  #if status is 'on loan' the game should not be loanable 
     """Add a new game."""
     if request.method != 'POST':
         # No data submitted -> create a blank form.
