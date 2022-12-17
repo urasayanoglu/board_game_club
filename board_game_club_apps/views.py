@@ -78,3 +78,10 @@ def new_loan(request):  #if status is 'on loan' the game should not be loanable
     # Display a blank or an invalid form:
     context = {'form': form}
     return render(request, 'board_game_club_apps/new_loan.html', context)
+
+@login_required
+def my_loans(request):
+    """Show loan informations."""
+    loan = Loan.objects.order_by('loan_date')
+    context = {'loans':loan}
+    return render(request, 'board_game_club_apps/my_loans.html', context)

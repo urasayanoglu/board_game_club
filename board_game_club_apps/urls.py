@@ -19,4 +19,6 @@ urlpatterns = [
     path('new_game/', views.new_game, name='new_game'), 
     # Page for loaning a new game
     path('new_loan/', views.new_loan, name='new_loan'),
+    # Page that shows current loans of a user
+    path('my_loans', views.my_loans, name='my_loans'),
 ]
