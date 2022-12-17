@@ -41,6 +41,10 @@ class Loan(models.Model):
     def __str__(self):
         """Return a string representation of the loan model."""
         return f"Game {self.game_loaned} borrowed on {self.loan_date}"
+    
+    def statuschange(self):
+        """Change the status of the board game to on loan"""
+        return Game.status('o')
 
     
 
