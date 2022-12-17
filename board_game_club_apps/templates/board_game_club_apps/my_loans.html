@@ -6,9 +6,9 @@
 
 {% block content %}
   <ul>
-    {% for game in games %}
+    {% for loan in loan %}
       <li><h3>
-        <a href="{% url 'board_game_club_apps:my_loand' loan.id %}">{{ loan }}</a>
+        <a href="{% url 'board_game_club_apps:my_loans' loan.id %}">{{ loan }}</a>
       </h3></li>
     {% empty %}
       <li><h3>Unfortunately, there is not any loaned game.</h3></li>
