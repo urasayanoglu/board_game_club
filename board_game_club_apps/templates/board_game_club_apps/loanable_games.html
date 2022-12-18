@@ -7,11 +7,11 @@
 {% block content %}
   <ul>
     {% for game in games %}
-      <li><h3>
+      <li><h5>
         <a href="{% url 'board_game_club_apps:game' game.id %}">{{ game }}</a>
-      </h3></li>
+      </h5></li>
     {% empty %}
-      <li><h3>Unfortunately, there is not any board game for loan.</h3></li>
+      <li><h5>Unfortunately, there is not any board game for loan.</h5></li>
     {% endfor %}
   </ul>
 

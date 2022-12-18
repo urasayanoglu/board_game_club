@@ -5,17 +5,18 @@
 {% endblock page_header %}
 
 {% block content %}
-  <h4>Loans:</h4>
+  <h4>About:</h4>
   <ul>
-    {% for loan in loans %}
-      <div class="card mb-3">
-        <h4 class="card-header">
-          Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }} <br>
-          Return Date:
-        </h4>
-      </div>
-    {% empty %}
-      <li>There is not a loan for this game yet.</li>
-    {% endfor %}
+    <div class="card mb-3">
+      <h5 class="card-header">
+        <p>Genre: {{ game.genre }}</p>
+        <p>Year Published: {{ game.year_published}}</p>
+        <p>Publisher: {{ game.publisher }}</p>
+        <p>Number of Max Player: {{ game.number_of_players }}</p>
+        <p>Minumum Age: {{ game.min_age }}</p>
+        <p>Difficulty: {{ game.difficulty}}</p>
+        <p>Description: {{ game.description }}</p>
+      </h5>
+    </div>
   </ul>
 {% endblock content %}

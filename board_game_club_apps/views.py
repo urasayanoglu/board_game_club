@@ -24,8 +24,8 @@ def game(request, game_id):
     # Making sure the game belongs to the current user:
     if game.owner != request.user:
         raise Http404
-    loans = game.loan_set.order_by('-loan_date')
-    context = {'game': game, 'loans':loans}
+    elif game.status != 'o':
+            context = {'game': game}
     return render(request, 'board_game_club_apps/game.html', context)
 
 @login_required
@@ -83,6 +83,6 @@ def new_loan(request):
 @login_required
 def my_loans(request):
     """Show loan informations."""
-    loan = Loan.objects.order_by('loan_date')
-    context = {'loans':loan}
+    loans = Loan.objects.filter(owner = request.user).order_by('loan_date')
+    context = {'loans':loans}
     return render(request, 'board_game_club_apps/my_loans.html', context)
