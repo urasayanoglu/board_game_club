@@ -19,7 +19,7 @@ def games(request):
 
 @login_required
 def game(request, game_id):
-    """Show a board game with loan information."""
+    """Show information of a board game."""
     game = Game.objects.get(id=game_id)
     # Making sure the game belongs to the current user:
     if game.owner != request.user:
@@ -27,6 +27,27 @@ def game(request, game_id):
     elif game.status != 'o':
             context = {'game': game}
     return render(request, 'board_game_club_apps/game.html', context)
+
+@login_required
+def edit_game(request, game_id):
+    """Edit an existing board game."""
+    game = Game.objects.get(id=game_id)
+    # Making sure the game belongs to the current user:
+    if game.owner != request.user:
+        raise Http404
+    if request.method != 'POST':
+        # Initial request, pre-fill form with the current experience.
+        form = GameForm(instance=game)
+    else:
+        # POST data submitted -> process the data.
+        form = GameForm(instance=game, data=request.POST )
+        if form.is_valid():
+            edit_game = form.save(commit=False)
+            edit_game.owner = request.user
+            edit_game.save()
+            return redirect('board_game_club_apps:game', game_id = game.id)
+    context = {'form': form}
+    return render(request, 'board_game_club_apps/edit_game.html', context)
 
 @login_required
 def new_game(request):

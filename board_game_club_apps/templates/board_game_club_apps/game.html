@@ -9,6 +9,7 @@
   <ul>
     <div class="card mb-3">
       <h5 class="card-header">
+        <p>Name: {{ game.name }}</p>
         <p>Genre: {{ game.genre }}</p>
         <p>Year Published: {{ game.year_published}}</p>
         <p>Publisher: {{ game.publisher }}</p>
@@ -19,4 +20,6 @@
       </h5>
     </div>
   </ul>
+
+  <h3><a class="btn btn-lg btn-primary" href="{% url 'board_game_club_apps:edit_game' game.id %}" role="button">Edit My Board Game</a></h3>
 {% endblock content %}
