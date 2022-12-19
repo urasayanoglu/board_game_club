@@ -1,0 +1,17 @@
+{% extends "board_game_club_apps/base.html" %}
+{% load bootstrap4 %}
+{% block page_header %}
+  <h3>Board Game: {{ game }}</h3>
+{% endblock page_header %}
+
+{% block content %}
+  <p>Edit My Board Game:</p>
+  <form action="{% url 'board_game_club_apps:edit_game' game.id %}" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_form_errors form type='non_fields' %}
+    {% buttons reset="Cancel" %}
+      <button name="submit" class="btn btn-primary">Save changes</button>
+    {% endbuttons %}
+  </form>
+{% endblock content %}
