@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
-from .models import Game, Loan
-from .forms import GameForm, LoanForm
+from .models import Game, Loan, Return
+from .forms import GameForm, LoanForm, ReturnForm
 
 # Create your views here.
 def index(request):
@@ -106,3 +106,43 @@ def my_loans(request):
     loans = Loan.objects.filter(owner = request.user).order_by('loan_date')
     context = {'loans':loans}
     return render(request, 'board_game_club_apps/my_loans.html', context)
+
+@login_required
+def new_return(request):
+    """Add a new game."""
+    if request.method != 'POST':
+        # No data submitted -> create a blank form.
+        form = ReturnForm()
+    else:
+        # Post data submitted -> process the data.
+        form = ReturnForm(data = request.POST)
+        if form.is_valid():
+            new_return = form.save(commit=False)
+            new_return.owner = request.user
+            new_return.save()
+            return redirect('board_game_club_apps:loanable_games')
+    # Display a blank or an invalid form:
+    context = {'form': form}
+    return render(request, 'board_game_club_apps/new_return.html', context)
+
+@login_required
+def returnable_games(request):
+    """Show all returnable board games."""
+    games = Game.objects.order_by('status')
+    context = {'games': games}
+    return render(request, 'board_game_club_apps/returnable_games.html', context)
+
+@login_required
+def returnable_game(request, game_id):
+    """Show a board game with return information."""
+    game = Game.objects.get(id=game_id)
+    loans = game.loan_set.order_by('-loan_date')
+    context = {'game': game, 'loans':loans}
+    return render(request, 'board_game_club_apps/returnable_game.html', context)
+
+@login_required
+def my_return(request):
+    """Show possible return informations."""
+    loans = Return.objects.filter(owner = request.user).order_by('game_returned')
+    context = {'loans':loans}
+    return render(request, 'board_game_club_apps/my_return.html', context)

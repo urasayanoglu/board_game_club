@@ -1,0 +1,19 @@
+{% extends "board_game_club_apps/base.html" %}
+
+{% block page_header %}
+  <h1>Available Games for Return</h1>
+{% endblock page_header %}
+
+{% block content %}
+  <ul>
+    {% for game in games %}
+      <li><h5>
+        <a href="{% url 'board_game_club_apps:game' game.id %}">{{ game }}</a>
+      </h5></li>
+    {% empty %}
+      <li><h5>Unfortunately, there is not any board game for return.</h5></li>
+    {% endfor %}
+  </ul>
+
+  <h3><a class="btn btn-lg btn-primary" href="{% url 'board_game_club_apps:new_return' %}" role="button">Return a new game</a></h3>
+{% endblock content %}

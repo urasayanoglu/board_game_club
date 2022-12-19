@@ -1,21 +1,21 @@
 {% extends "board_game_club_apps/base.html" %}
 
 {% block page_header %}
-  <h1>My Loans</h1>
+  <h1>My Returns</h1>
 {% endblock page_header %}
 
 {% block content %}
   <ul>
-    {% for loan in loans %}
+    {% for return in returns %}
       <div class="card mb-3">
         <h5 class="card-header">
-          Game Loaned: {{ loan.game_loaned }} <br>
+          Game Loaned: {{ return.game_returned }} <br>
           Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }} <br>
           Return Date: {{ loan.return_date|date:'d-m-Y D H:i'  }} <br> 
         </h5>
       </div>
     {% empty %}
-      <li><h5>This user has no games currently on loan.</h5></li>
+      <li><h5>This user has no games currently to return.</h5></li>
     {% endfor %}
   </ul>
 

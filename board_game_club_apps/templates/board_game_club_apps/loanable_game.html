@@ -11,7 +11,7 @@
       <div class="card mb-3">
         <h5 class="card-header">
           Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }} <br>
-          Return Date:
+          Return Date: {{ loan.return_date|date:'d-m-Y D H:i'  }} <br>
         </h5>
       </div>
     {% empty %}

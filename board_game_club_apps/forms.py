@@ -1,5 +1,5 @@
 from django import forms
-from .models import Game, Loan
+from .models import Game, Loan, Return
 
 class GameForm(forms.ModelForm):
     class Meta:
@@ -33,4 +33,14 @@ class LoanForm(forms.ModelForm):
         ]
         labels = {
             'game_loaned': "Name of the Loaned Game",
+        }
+
+class ReturnForm(forms.ModelForm):
+    class Meta:
+        model = Return
+        fields = [
+            'game_returned',
+        ]
+        labels = {
+            'game_returned': "Name of the Returned Game",
         }
