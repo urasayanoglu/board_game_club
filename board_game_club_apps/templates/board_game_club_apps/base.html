@@ -21,9 +21,25 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-            <a class="nav-link" href="{% url 'board_game_club_apps:games' %}">Board Games</a></li>
+              <a class="nav-link" href="{% url 'board_game_club_apps:loanable_games' %}">Loanable Games</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'board_game_club_apps:games' %}">My Board Games</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'board_game_club_apps:my_loans' %}">My Loans</a></li>
           </ul>
           <ul class="navbar-nav ml-auto">
+            <div id="google_translate_element"></div>
+            <script type="text/javascript">
+              function googleTranslateElementInit() {
+                  new google.translate.TranslateElement(
+                      {pageLanguage: 'en'},
+                      'google_translate_element'
+                  );
+              }
+           </script>
+               <script type="text/javascript"
+               src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+           </script>
             {% if user.is_authenticated %}
               <li class="nav-item">
                 <span class="navbar-text"}">Hello, {{ user.username }}.</span>
@@ -51,5 +67,10 @@
         {% block content %}{% endblock content %}
       </div>
     </main>
+    <div class="container">
+      <footer class="py-3 my-4">
+        <p class="text-center text-muted">&copy;<a href="https://www.github.com/urasayanoglu/board_game_club" target="_blank">2022 Application Programming - Group P1</a></p>
+      </footer>
+    </div>
   </body>
 </html>

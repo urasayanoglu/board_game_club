@@ -32,7 +32,8 @@ class Loan(models.Model):
 
     game_loaned = models.ForeignKey(Game, on_delete=models.CASCADE)
     loan_date = models.DateTimeField(auto_now_add=True)
-    return_date = models.DateTimeField() # ? Is there a way to limit the return date for 2 weeks etc.
+    return_date = models.DateTimeField(null=True, blank=True) # ? Is there a way to limit the return date for 2 weeks etc.
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = 'loans'
@@ -40,6 +41,10 @@ class Loan(models.Model):
     def __str__(self):
         """Return a string representation of the loan model."""
         return f"Game {self.game_loaned} borrowed on {self.loan_date}"
+    
+    def statuschange(self):
+        """Change the status of the board game to on loan"""
+        return Game.status('o')
 
     
 

@@ -6,6 +6,8 @@
       <p class="lead"> It's FREE and a great way to check out fun new games! 
         Up to 3 games may be borrowed at one time.<br>
         Contact a Board Game Club member for full details!</p>
-      <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}" role="button">Register &raquo;</a>
+      {% if not user.is_authenticated %}
+        <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}" role="button">Register &raquo;</a>
+      {% endif %}
   </div>
 {% endblock page_header %}
