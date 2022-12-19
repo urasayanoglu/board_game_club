@@ -14,7 +14,7 @@ urlpatterns = [
     # Page with about info of a single game
     path('games/<int:game_id>/', views.game, name='game'),
     # Page for editing a board game
-    path('edit_game/<int:game_id>', views.edit_game, name="edit_game"),
+    path('edit_game/<int:game_id>/', views.edit_game, name="edit_game"),
     # Page with about info of a loanable game
     path('loanable_games/<int:game_id>/', views.loanable_game, name='loanable_game'),
     # Page for adding a new game
