@@ -44,11 +44,11 @@ class Loan(models.Model):
     
     def status_change(self):
         """Change the status of the board game to -> on loan"""
-        return self.game_loaned.status('o')
+        self.game_loaned.status = 'o'
     
     def return_game(self):
         """Change the status of the board game to -> available"""
-        return self.game_loaned.status('a')
+        self.game_loaned.status = 'a'
 
 
     
