@@ -1,4 +1,5 @@
 {% extends "board_game_club_apps/base.html" %}
+{% load bootstrap4 %}
 
 {% block page_header %}
   <h1>My Loans</h1>
@@ -11,7 +12,10 @@
         <h5 class="card-header">
           Game Loned: {{ loan.game_loaned }} <br>
           Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }} <br>
-          Return Date:
+          Return Date: {{ loan.return_time|date:'d-m-Y D H:i' }}
+          {% buttons %}
+          <button name="submit" class="btn btn-primary">Return Game</button>
+          {% endbuttons %}
         </h5>
       </div>
     {% empty %}
