@@ -46,7 +46,7 @@ def edit_game(request, game_id):
             edit_game.owner = request.user
             edit_game.save()
             return redirect('board_game_club_apps:game', game_id = game.id)
-    context = {'form': form}
+    context = {'game': game, 'form': form}
     return render(request, 'board_game_club_apps/edit_game.html', context)
 
 @login_required
@@ -94,12 +94,25 @@ def new_loan(request):
         if form.is_valid():
             new_loan = form.save(commit=False)
             new_loan.owner = request.user
+            new_loan.status_change()
             new_loan.save()
             return redirect('board_game_club_apps:loanable_games')
     # Display a blank or an invalid form:
     context = {'form': form}
     return render(request, 'board_game_club_apps/new_loan.html', context)
 
+@login_required
+def return_loan(request, loan_id):
+    """Return a loaned board game."""
+    loan = Loan.objects.get(id=loan_id)
+    context = {'loan': loan}
+    if loan.owner != request.user:
+        raise Http404
+    if request.method == 'POST':
+        loan.return_game()
+        loan.delete()
+    return render(request, 'board_game_club_apps/my_loans.html', context)
+    
 @login_required
 def my_loans(request):
     """Show loan informations."""
