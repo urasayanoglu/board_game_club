@@ -21,10 +21,7 @@ def games(request):
 def game(request, game_id):
     """Show information of a board game."""
     game = Game.objects.get(id=game_id)
-    # Making sure the game belongs to the current user:
-    if game.owner != request.user:
-        raise Http404
-    elif game.status != 'o':
+    if game.status != 'o':
             context = {'game': game}
     return render(request, 'board_game_club_apps/game.html', context)
 
@@ -34,7 +31,7 @@ def edit_game(request, game_id):
     game = Game.objects.get(id=game_id)
     # Making sure the game belongs to the current user:
     if game.owner != request.user:
-        raise Http404
+        raise Http404("You are not the owner of the game, you cannot edit.")
     if request.method != 'POST':
         # Initial request, pre-fill form with the current experience.
         form = GameForm(instance=game)
