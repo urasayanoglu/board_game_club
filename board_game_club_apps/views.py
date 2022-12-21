@@ -104,10 +104,10 @@ def return_loan(request, loan_id):
     loan = Loan.objects.get(id=loan_id)
     context = {'loan': loan}
     if loan.owner != request.user:
-        raise Http404
+        raise Http404("You cannot return a game that you didnt loan.")
     if request.method == 'POST':
         loan.return_game()
-        loan.delete()
+    context = {'loan': loan}
     return render(request, 'board_game_club_apps/my_loans.html', context)
     
 @login_required
