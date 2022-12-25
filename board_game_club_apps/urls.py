@@ -23,4 +23,6 @@ urlpatterns = [
     path('new_loan/', views.new_loan, name='new_loan'),
     # Page that shows current loans of a user
     path('my_loans', views.my_loans, name='my_loans'),
+    # Page that shows loans after a loan(s) is/are returned.
+    path('return_loan/<int:loan_id>', views.return_loan, name="return_loan"),
 ]

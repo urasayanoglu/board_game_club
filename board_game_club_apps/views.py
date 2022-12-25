@@ -102,12 +102,13 @@ def new_loan(request):
 def return_loan(request, loan_id):
     """Return a loaned board game."""
     loan = Loan.objects.get(id=loan_id)
-    context = {'loan': loan}
     if loan.owner != request.user:
         raise Http404("You cannot return a game that you didnt loan.")
     if request.method == 'POST':
         loan.return_game()
-    context = {'loan': loan}
+        loan.delete()
+    loans = Loan.objects.filter(owner = request.user).order_by('loan_date')
+    context = {'loans': loans}
     return render(request, 'board_game_club_apps/my_loans.html', context)
     
 @login_required
