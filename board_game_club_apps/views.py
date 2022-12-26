@@ -22,7 +22,8 @@ def game(request, game_id):
     """Show information of a board game."""
     game = Game.objects.get(id=game_id)
     if game.status != 'o':
-            context = {'game': game}
+        context = {'game': game}
+    context = {'game': game}
     return render(request, 'board_game_club_apps/game.html', context)
 
 @login_required
