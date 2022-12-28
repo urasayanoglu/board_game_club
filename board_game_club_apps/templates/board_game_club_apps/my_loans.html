@@ -1,28 +1,76 @@
+<style>
+  .container {
+    margin:auto;
+    width: 1500px;
+    display: block;
+    background-color: #F8F9FA;
+  }
+
+  .card-holder {
+    display: block;
+  }
+
+  .games {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+.single-game {
+  background-color: #55595c;
+  text-align: left;
+  padding: 20px 30px;
+  margin: 5px;
+  display:block
+}
+p {
+  text-decoration: none;
+  color:#F8F9FA;
+}
+
+.btn {
+  display:flex;
+  margin-left:-10px;
+}
+.btn button {
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+}
+</style>
+
+
 {% extends "board_game_club_apps/base.html" %}
 {% load bootstrap4 %}
- 
+
+
 {% block page_header %}
   <h1>My Loans</h1>
 {% endblock page_header %}
- 
+
 {% block content %}
-  <ul>
-    {% for loan in loans %}
-      <div class="card mb-3">
-        <h5 class="card-header">
-          Game Loned: {{ loan.game_loaned }} <br>
-          Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }} <br>
-          Return Date: {{ loan.return_time|date:'d-m-Y D H:i' }}
-          <form action="{% url 'board_game_club_apps:return_loan' loan.id %}" method="post" class="form">
-            {% csrf_token %}
-            {% buttons %}
-              <button name="submit" class="btn btn-primary">Return Game</button>
-            {% endbuttons %}
-          </form>
-        </h5>
-      </div>
-    {% empty %}
-      <li><h5>Unfortunately, there is not any loaned game.</h5></li>
-    {% endfor %}
-  </ul>
+
+<div class="container">
+  <div class="games">
+      {% for loan in loans %}
+        <div class="card-holder">
+          <div class="single-game">
+            <p>
+              Game Loned: {{ loan.game_loaned }} <br>
+              Loan Date: {{ loan.loan_date|date:'d-m-Y D H:i'  }} <br>
+              Return Date: {{ loan.return_time|date:'d-m-Y D H:i' }}
+            </p>
+            <br>
+            <form action="{% url 'board_game_club_apps:return_loan' loan.id %}" method="post" class="form">
+              {% csrf_token %}
+              {% buttons %}
+                <button name="submit" class="btn btn-secondary">Return Game</button>
+              {% endbuttons %}
+            </form>
+          </div>
+        </div>
+      {% empty %}
+        <li><h5>Unfortunately, there is not any board game for loan.</h5></li>
+      {% endfor %}
+  </div>
+</div>
 {% endblock content %}
