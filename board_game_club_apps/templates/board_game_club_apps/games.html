@@ -1,21 +1,74 @@
+<style>
+  .container {
+    margin:auto;
+    width: 1500px;
+    display: block;
+    background-color: #F8F9FA;
+  }
+
+  .card-holder {
+    display: block;
+  }
+
+  .games {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+.single-game {
+  background-color: #55595c;
+  text-align: left;
+  padding: 20px 30px;
+  margin: 5px;
+  display:block
+}
+p {
+  text-decoration: none;
+  color:#F8F9FA;
+}
+
+.btn {
+  display:flex;
+  margin-left:-10px;
+}
+.btn button {
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+}
+</style>
+
+
 {% extends "board_game_club_apps/base.html" %}
 
+
 {% block page_header %}
-  <h1>Board Games</h1>
+  <h1>My Board Games</h1>
 {% endblock page_header %}
 
 {% block content %}
-  <ul>
-    {% for game in games %}
-      <li><h5>
-        <a href="{% url 'board_game_club_apps:game' game.id %}">{{ game }}</a>
-      </h5></li>
-    {% empty %}
-      <li><h5>Unfortunately, there is not any board game.</h5></li>
-    {% endfor %}
-  </ul>
 
-  <h3><a class="btn btn-lg btn-primary" href="{% url 'board_game_club_apps:new_game' %}" role="button">Add a new game</a></h3>
+<div class="container">
+  <div class="games">
+      {% for game in games %}
+        <div class="card-holder">
+          <div class="single-game">
+            <p>{{ game }}</p>
+            <br>
+          <div class="btn">
+            <button type="button"><a href="{% url 'board_game_club_apps:game' game.id %}">View Details</a></button>
+            <button type="button"><a href="{% url 'board_game_club_apps:edit_game' game.id %}">Edit My Game</a></button>
+          </div>
+        </div>
+        </div>
+      {% empty %}
+        <li><h5>Unfortunately, there is not any board game for loan.</h5></li>
+      {% endfor %}
+  </div>
+</div>
+<div class="btn">
+  <button type="button"><a href="{% url 'board_game_club_apps:new_game' %}">Add a new game</button>
+</div>
 {% endblock content %}
 
 
