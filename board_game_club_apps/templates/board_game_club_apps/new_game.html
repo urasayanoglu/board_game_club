@@ -1,8 +1,11 @@
 {% extends "board_game_club_apps/base.html" %}
 {% load bootstrap4 %}
 
+{% block page_header %}
+  <h1>Add Board Game</h1>
+{% endblock page_header %}
+
 {% block content %}
-<p>Add a new board game:</p>
 <form action="{% url 'board_game_club_apps:new_game' %}" method="post" class="form">
     {% csrf_token %}
     {% bootstrap_form form %}
@@ -10,6 +13,5 @@
     {% buttons reset="Cancel" %}
       <button name="submit" class="btn btn-primary">Add Game</button>
     {% endbuttons %}
-    
 </form>
 {% endblock content %}
