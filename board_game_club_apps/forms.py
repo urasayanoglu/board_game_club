@@ -32,5 +32,5 @@ class LoanForm(forms.ModelForm):
             'game_loaned',
         ]
         labels = {
-            'game_loaned': "Name of the Loaned Game",
+            'game_loaned': "Select the desired game to be loaned from the list below:",
         }
